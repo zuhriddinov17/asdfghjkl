@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+     <form action="{% url 'search_patient_url' %}">
+        {% csrf_token %}
+        <input type="search" name="name" required>
+        <button>Search</button>
+    </form>
+    <table>
+        <tr>
+            <th>N</th>
+            <th>Ism</th>
+            <th>Yosh</th>
+            <th>raqam</th>
+            <th>Kirish</th>
+        </tr>
+        {% for i in patients %}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.age}}</td>
+            <td>{{i.phone}}</td>
+            <td><a href="{% url 'doctor_details_url' i.doctor.id %}">{{i.doctor}}</a>/<td>
+            <td><a href="{% url 'doctor_details_url' i.id%}">Batafsil</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
